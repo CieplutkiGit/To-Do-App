@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Main : MonoBehaviour
 {
-    public InputField NameInput;
-    public InputField DescriptionInput;
-    public InputField StartTimeInput;
-    public InputField EndTimeInput;
+    public TMP_InputField NameInput;
+    public TMP_InputField DescriptionInput;
+    public TMP_InputField StartTimeInput;
+    public TMP_InputField EndTimeInput;
     public Button AddTaskButton;
     public GameObject TaskPrefab;
     public Transform TaskContainer;

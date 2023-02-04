@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TaskDisplay : MonoBehaviour
 {
-    public Text NameText;
-    public Text DescriptionText;
-    public Text StartTimeText;
-    public Text EndTimeText;
+    public TextMeshProUGUI NameText;
+    public TextMeshProUGUI DescriptionText;
+    public TextMeshProUGUI StartTimeText;
+    public TextMeshProUGUI EndTimeText;
     public Button CompleteButton;
 
     private Task _task;
