@@ -14,13 +14,25 @@ public class Main : MonoBehaviour
     public Transform TaskContainer;
     public TaskManager TaskManager;
 
-    private void Start()
+     private void Start()
     {
         AddTaskButton.onClick.AddListener(AddTask);
+        TaskManager.LoadTasks();
+        DisplayTasks();
+    }
+
+    private void DisplayTasks()
+    {
+        foreach (Task task in TaskManager.TaskList)
+        {
+            GameObject taskGO = Instantiate(TaskPrefab, TaskContainer);
+            taskGO.GetComponent<TaskDisplay>().Init(task);
+        }
     }
 
     private void AddTask()
     {
+
         string name = NameInput.text;
         string description = DescriptionInput.text;
         DateTime startTime = DateTime.Parse(StartTimeInput.text);
@@ -31,5 +43,8 @@ public class Main : MonoBehaviour
 
         GameObject taskGO = Instantiate(TaskPrefab, TaskContainer);
         taskGO.GetComponent<TaskDisplay>().Init(task);
+
+
+        TaskManager.SaveTasks();
     }
 }

@@ -1,10 +1,20 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class TaskManager : MonoBehaviour
 {
     public List<Task> TaskList = new List<Task>();
+    private readonly string fileName = "tasks.json";
+
+    public static TaskManager Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public void AddTask(Task task)
     {
@@ -22,5 +32,21 @@ public class TaskManager : MonoBehaviour
         task.Description = description;
         task.StartTime = startTime;
         task.EndTime = endTime;
+        SaveTasks();
+    }
+
+    public void SaveTasks()
+    {
+        string json = JsonConvert.SerializeObject(TaskList, Formatting.Indented);
+        File.WriteAllText(Application.persistentDataPath + "/" + fileName, json);
+    }
+
+    public void LoadTasks()
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + fileName))
+        {
+            string json = File.ReadAllText(Application.persistentDataPath + "/" + fileName);
+            TaskList = JsonConvert.DeserializeObject<List<Task>>(json);
+        }
     }
 }

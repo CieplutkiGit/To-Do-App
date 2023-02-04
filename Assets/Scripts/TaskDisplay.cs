@@ -12,6 +12,7 @@ public class TaskDisplay : MonoBehaviour
 
     private Task _task;
 
+
     public void Init(Task task)
     {
         _task = task;
@@ -27,5 +28,7 @@ public class TaskDisplay : MonoBehaviour
     {
         _task.IsCompleted = true;
         gameObject.SetActive(false);
+        TaskManager.Instance.RemoveTask(_task);
+        TaskManager.Instance.SaveTasks();
     }
 }
